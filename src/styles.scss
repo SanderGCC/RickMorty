@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
 
+*{
+    box-sizing: border-box;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//COLORES 
+// PALETA DE COLORES PRINCIPALES RICK & MORTIS
+$KiwiGreen: #88e23b;
+$Texas: #ebe480;
+$TardisBlue: #043c6e;
+$Endo: #60a85f;
+$Mystery: #a6cccc;
+$CallaGreen: #6b7132;
+
+@import '../src/assets/scss/global.scss';
