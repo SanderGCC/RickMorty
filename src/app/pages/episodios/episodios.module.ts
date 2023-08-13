@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EpisodiosComponent } from './episodios.component';
 
+import { EpisodiosRoutingModule } from './episodios-routing.module';
+import { EpisodiosComponent } from './episodios.component';
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { EpisodiosComponent } from './episodios.component';
     EpisodiosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    EpisodiosRoutingModule
   ]
 })
 export class EpisodiosModule { }

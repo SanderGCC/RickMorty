@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PersonajesComponent } from './personajes.component';
 
+import { PersonajesRoutingModule } from './personajes-routing.module';
+import { PersonajesComponent } from './personajes.component';
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { PersonajesComponent } from './personajes.component';
     PersonajesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PersonajesRoutingModule
   ]
 })
 export class PersonajesModule { }
