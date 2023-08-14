@@ -7,11 +7,13 @@ import { LugaresRoutingModule } from './lugares-routing.module';
 import { LugaresComponent } from './lugares.component';
 import { LugaresModel } from './model/lugares.model';
 import { LugaresService } from './service/lugares.service';
+import { DetalleLugaresComponent } from './components/detalle-lugares/detalle-lugares.component';
 
 
 @NgModule({
   declarations: [
-    LugaresComponent
+    LugaresComponent,
+    DetalleLugaresComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,15 @@
+<div class="centrar-todo pt-3 ">
+    <mat-card class="card-detalle centrar-todo">
+        <h2 class="font-Creepster font-color-endo">Carta Numero #{{lugar?.id}}</h2>
+        <mat-card-header>
+            <mat-card-title class="card-detalle-title">{{lugar?.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="m-0">Dimension: <span class="font-color-endo">{{!!!!lugar?.dimension ? !!lugar?.dimension :
+                    'desconocido'}}</span></p>
+            <p class="m-0">Tipo: <span class="font-color-endo">{{!!lugar?.type ? lugar?.type :
+                    'desconocido'}}</span></p>
+            <p class="m-0">Fecha Creación: <span class="font-color-endo">{{lugar?.created | date }}</span></p>
+        </mat-card-content>
+    </mat-card>
+</div>
