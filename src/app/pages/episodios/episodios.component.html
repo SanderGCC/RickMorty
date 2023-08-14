@@ -1,1 +1,13 @@
-<p>episodios works!</p>
+<div infiniteScroll (scrolled)="cargarMasEpisodios()">
+    <div class="grid-cards">
+      <mat-card class="card" *ngFor="let episodio of episodios">
+        <mat-card-header class="card-header">
+          <mat-card-title (click)="irEpisodioPorId(episodio.id)" class="card-title">{{episodio.name}} <mat-icon
+              class="card-verMas"> link
+            </mat-icon></mat-card-title>
+          <mat-card-subtitle class="card-subtitle">{{episodio.episode}} </mat-card-subtitle>
+        </mat-card-header>
+  
+      </mat-card>
+    </div>
+  </div>

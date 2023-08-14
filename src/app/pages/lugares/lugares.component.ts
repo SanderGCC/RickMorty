@@ -73,22 +73,6 @@ export class LugaresComponent {
   }
 
   /**
-   * Método utilizado para deteminar el estado del personaje
-   * @param estado estado del personaje
-   * @returns estado del personaje
-   */
-  public obtenerEstado(estado: string): string {
-    switch (estado) {
-      case Estado.vivo.nombreApi:
-        return Estado.vivo.nombre
-      case Estado.muerto.nombreApi:
-        return Estado.muerto.nombre
-      default:
-        return Estado.desconocido.nombre
-    }
-  }
-
-  /**
    * Método activado por el scroll para cargar más lugares paginados
    */
   public cargarMasLugares(): void {
