@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MaterialModule } from 'src/app/modules/material.module';
 import { PersonajesModel } from './model/personajes.model';
 import { PersonajesRoutingModule } from './personajes-routing.module';
@@ -15,7 +16,8 @@ import { PersonajesService } from './service/personajes.service';
   imports: [
     CommonModule,
     PersonajesRoutingModule,
-    MaterialModule
+    MaterialModule,
+    InfiniteScrollModule
   ],
   providers: [
     PersonajesModel,

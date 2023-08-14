@@ -1,4 +1,4 @@
-<div>
+<div infiniteScroll (scrolled)="cargarMasPersonajes()">
   <div class="grid-cards">
     <mat-card class="card" *ngFor="let personaje of personajes">
       <img mat-card-image class="card-image" [src]="personaje.image" alt="Photo of a Shiba Inu">
