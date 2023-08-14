@@ -1,4 +1,4 @@
-.page{
+.page {
     // background-color: $KiwiGreen;
     // background-color: $Texas;
     background-color: $TardisBlue;
@@ -6,4 +6,146 @@
     // background-color: $Mystery;
     // background-color: $CallaGreen;
     min-height: calc(100% - 52.8px);
+}
+
+.navbar {
+    @extend .font-Creepster;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    padding: 20px 100px;
+}
+
+.card {
+    border-radius: 30px !important;
+    background-color: $DarkSlateGray !important ;
+    padding: 5px;
+    display: flex !important;
+    flex-direction: row !important;
+    &-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom: none !important;
+        .mat-mdc-card-header-text {
+            display: flex;
+            gap: 5px;
+            flex-direction: column;
+        }
+    }
+    &-image {
+        width: 100px;
+        border-radius: 25px !important;
+    }
+    &-title {
+        color: $Mystery !important;
+        line-height: 20px !important;
+
+        position: relative;
+        padding-bottom: 0.1rem;
+        padding-top: 0.1rem;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            border-radius: 2px;
+            background-color: $Endo;
+            bottom: 0;
+            left: 0;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+    }
+    &-subtitle {
+        color: $Mystery !important;
+    }
+    &-verMas {
+        display: none !important;
+    }
+    .mat-icon {
+        width: 12px !important;
+        height: 12px !important;
+        font-size: 12px !important;
+    }
+    .animacionCorazon {
+        color: red;
+        animation: pulso 1s infinite;
+        transform-origin: center;
+    }
+    .estadoDesconocido {
+        animation: pregunta 1s infinite;
+        transform-origin: center;
+    }
+    &:hover {
+        transform: scale(1.05);
+
+        .card-title {
+            &::before {
+                transform-origin: left;
+                transform: scaleX(1);
+            }
+            color: $Endo !important;
+        }
+        .card-verMas {
+            display: inline !important;
+        }
+    }
+}
+
+.text-line-animation {
+    position: relative;
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        border-radius: 2px;
+        background-color: #ffffff;
+        bottom: 0;
+        left: 0;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover::before {
+    }
+}
+
+@keyframes pulso {
+    from {
+        transform: none;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    to {
+        transform: none;
+    }
+}
+
+@keyframes pregunta {
+    from {
+        transform: rotateZ(-10deg);
+    }
+    25% {
+        transform: rotateZ(0deg);
+    }
+    50% {
+        transform: rotateZ(10deg);
+    }
+    75% {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(-10deg);
+    }
 }
