@@ -7,11 +7,13 @@ import { PersonajesModel } from './model/personajes.model';
 import { PersonajesRoutingModule } from './personajes-routing.module';
 import { PersonajesComponent } from './personajes.component';
 import { PersonajesService } from './service/personajes.service';
+import { DetallePersonajeComponent } from './components/detalle-personaje/detalle-personaje.component';
 
 
 @NgModule({
   declarations: [
-    PersonajesComponent
+    PersonajesComponent,
+    DetallePersonajeComponent
   ],
   imports: [
     CommonModule,

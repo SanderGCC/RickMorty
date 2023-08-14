@@ -1,9 +1,9 @@
 <div infiniteScroll (scrolled)="cargarMasPersonajes()">
   <div class="grid-cards">
     <mat-card class="card" *ngFor="let personaje of personajes">
-      <img mat-card-image class="card-image" [src]="personaje.image" alt="Photo of a Shiba Inu">
+      <img mat-card-image class="card-image" [src]="personaje.image"  >
       <mat-card-header class="card-header">
-        <mat-card-title (click)="irInicioPagina()" class="card-title">{{personaje.name}} <mat-icon class="card-verMas"> link
+        <mat-card-title (click)="irPersonajePorId(personaje.id)" class="card-title">{{personaje.name}} <mat-icon class="card-verMas"> link
           </mat-icon></mat-card-title>
         <mat-card-subtitle class="card-subtitle">{{obtenerEstado(personaje.status)}}
           <mat-icon *ngIf="personaje.status == eestado.vivo.nombreApi" class="card-corazonIcon animacionCorazon">

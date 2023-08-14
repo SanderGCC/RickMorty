@@ -1,1 +1,13 @@
-<p>lugares works!</p>
+<div infiniteScroll (scrolled)="cargarMasLugares()">
+  <div class="grid-cards">
+    <mat-card class="card" *ngFor="let lugar of lugares">
+      <mat-card-header class="card-header">
+        <mat-card-title (click)="irPersonajePorId(lugar.id)" class="card-title">{{lugar.name}} <mat-icon
+            class="card-verMas"> link
+          </mat-icon></mat-card-title>
+        <mat-card-subtitle class="card-subtitle">{{lugar.dimension}} </mat-card-subtitle>
+      </mat-card-header>
+
+    </mat-card>
+  </div>
+</div>

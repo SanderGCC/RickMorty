@@ -15,10 +15,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.font-Creepster{
-    font-family: 'Creepster', cursive !important;
-}
-
 //COLORES
 // PALETA DE COLORES PRINCIPALES RICK & MORTIS
 $KiwiGreen: #88e23b;
@@ -28,5 +24,14 @@ $Endo: #60a85f;
 $Mystery: #a6cccc;
 $CallaGreen: #6b7132;
 $DarkSlateGray: #052828;
+
+.font-Creepster{
+    font-family: 'Creepster', cursive !important;
+}
+
+.font-color-endo{
+    color: $Endo;
+}
+
 
 @import "../src/assets/scss/global.scss";

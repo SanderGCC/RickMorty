@@ -1,0 +1,33 @@
+<div class="centrar-todo pt-3 ">
+    <mat-card class="card-detalle centrar-todo">
+        <h2 class="font-Creepster font-color-endo">Carta Numero #{{personaje?.id}}</h2>
+        <div class="d-flex justify-content-center">
+            <img mat-card-image [src]="personaje?.image" class="card-detalle-image">
+        </div>
+        <mat-card-header>
+            <mat-card-title class="card-detalle-title">{{personaje?.name}}</mat-card-title>
+            <mat-card-subtitle class="card-detalle-subtitle">{{!!personaje?.origin?.name }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="m-0">Estado:
+                <span class="font-color-endo">{{obtenerEstado(personaje?.status)}}<mat-icon *ngIf="personaje?.status == eestado.vivo.nombreApi"
+                        class="card-detalle-corazonIcon animacionCorazon">
+                        favorite
+                    </mat-icon>
+                    <mat-icon *ngIf="personaje?.status == eestado.muerto.nombreApi" class="">
+                        favorite
+                    </mat-icon>
+                    <mat-icon *ngIf="personaje?.status == eestado.desconocido.nombreApi" class="estadoDesconocido">
+                        question_mark
+                    </mat-icon>
+                </span>
+            </p>
+            <p class="m-0">Especie: <span class="font-color-endo">{{!!personaje?.species ? personaje?.species : 'desconocido'}}</span></p>
+            <p class="m-0">Tipo: <span class="font-color-endo">{{!!personaje?.type ? personaje?.type : 'desconocido'}}</span></p>
+            <p class="m-0">Genero: <span class="font-color-endo">{{!!personaje?.gender ? personaje?.gender : 'desconocido'}}</span></p>
+            <p class="m-0">Ubicación: <span class="font-color-endo">{{!!personaje?.location?.name ?personaje?.location?.name:
+                    'desconocido'}}</span></p>
+            <p class="m-0">Fecha Creación: <span class="font-color-endo">{{personaje?.created | date }}</span></p>
+        </mat-card-content>
+    </mat-card>
+</div>
