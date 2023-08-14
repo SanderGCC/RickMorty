@@ -7,11 +7,13 @@ import { EpisodiosRoutingModule } from './episodios-routing.module';
 import { EpisodiosComponent } from './episodios.component';
 import { EpisodiosModel } from './model/episodios.model';
 import { EpisodiosService } from './service/episodios.service';
+import { DetalleEpisodioComponent } from './components/detalle-episodio/detalle-episodio.component';
 
 
 @NgModule({
   declarations: [
-    EpisodiosComponent
+    EpisodiosComponent,
+    DetalleEpisodioComponent
   ],
   imports: [
     CommonModule,

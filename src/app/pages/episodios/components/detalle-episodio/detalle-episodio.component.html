@@ -1,0 +1,13 @@
+<div class="centrar-todo pt-3 ">
+    <mat-card class="card-detalle centrar-todo">
+        <h2 class="font-Creepster font-color-endo">Carta Numero #{{episodio?.id}}</h2>
+        <mat-card-header>
+            <mat-card-title class="card-detalle-title">{{episodio?.name}}</mat-card-title>
+            <mat-card-subtitle class="card-detalle-subtitle">{{episodio?.episode}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="m-0">Fecha de emisión: <span class="font-color-endo">{{episodio?.air_date | date}}</span></p>
+            <p class="m-0">Fecha Creación: <span class="font-color-endo">{{episodio?.created | date }}</span></p>
+        </mat-card-content>
+    </mat-card>
+</div>
