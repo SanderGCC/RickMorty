@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
 import { Episodio } from 'src/app/interfaces/episodio.interface';
 import { EpisodiosModel } from './model/episodios.model';
 
@@ -30,12 +29,17 @@ export class EpisodiosComponent implements OnInit {
   /**
    * Variable que contiene el valor de la última pagina seleccionada
    */
-  public ultimaPagina: number = 1;
+  public ultimaPagina: number = 0;
 
   /**
    * Variable que contiene los lugares
    */
   public episodios: Array<Episodio> = []
+
+  /**
+   * total de episodios totales
+   */
+  public totalEpisodios: number = 1
 
   /**
    * Variable que controla cuando se debe detener la paginación
@@ -47,8 +51,29 @@ export class EpisodiosComponent implements OnInit {
     private _router: Router
   ) { }
 
+  /**
+   * Mètodo del ciclo de vida de angular
+   */
   ngOnInit(): void {
-    this._cargarMasEpisodios(0);
+    this._inicializarSuscripciones();
+  }
+
+  /**
+   * Mètodo que inicializa las suscripciones
+   */
+  private _inicializarSuscripciones(): void {
+    this._cargarMasEpisodios(1);
+
+    this._episodiosModel.totalEpisodios$.subscribe(info => {
+      this.consultar = !!info?.next
+      this.totalEpisodios = info?.count
+    })
+
+    this._episodiosModel.episodios$.subscribe(episodios => {
+      if (!!episodios) this.episodios = [...episodios]
+      const element = document.body;
+      if (element.scrollHeight <= element.clientHeight) this.cargarMasEpisodios()
+    })
   }
 
   /**
@@ -56,15 +81,8 @@ export class EpisodiosComponent implements OnInit {
    * @param pagina 
    */
   private _cargarMasEpisodios(pagina: number): void {
-    this._episodiosModel.obtenerEpisodios([{ campo: 'page', valor: pagina }]).pipe(take(1)).subscribe(data => {
-      if (!!data?.results) {
-        this.consultar = !!data?.info?.next
-        this.episodios = [...this.episodios, ...data.results]
-        const element = document.body;
-        if (element.scrollHeight <= element.clientHeight) this.cargarMasEpisodios()
-
-      }
-    })
+    console.log("sc ~ this.totalEpisodios >  this.episodios.length:", this.consultar,  this.episodios.length)
+    if(this.consultar) this._episodiosModel.loadEpisodios([{ campo: 'page', valor: pagina }])
   }
 
   /**

@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { EffectsModule } from '@ngrx/effects';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MaterialModule } from 'src/app/modules/material.module';
+import { DetalleEpisodioComponent } from './components/detalle-episodio/detalle-episodio.component';
 import { EpisodiosRoutingModule } from './episodios-routing.module';
 import { EpisodiosComponent } from './episodios.component';
 import { EpisodiosModel } from './model/episodios.model';
 import { EpisodiosService } from './service/episodios.service';
-import { DetalleEpisodioComponent } from './components/detalle-episodio/detalle-episodio.component';
+import { EpisodiosEffects } from './store/effects/episodios.effects';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { DetalleEpisodioComponent } from './components/detalle-episodio/detalle-
     CommonModule,
     EpisodiosRoutingModule,
     MaterialModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    EffectsModule.forFeature([EpisodiosEffects]),
   ],
   providers: [
     EpisodiosService,
