@@ -73,7 +73,7 @@ export class PersonajesComponent implements OnInit {
     this._personajesModel.personajes$.subscribe(personajes => {
       if (!!personajes) this.personajes = [...personajes]
       const element = document.body;
-      if (element.scrollHeight <= element.clientHeight) this.cargarMasPersonajes()
+      if (element.scrollHeight - element.clientHeight <= 5) this.cargarMasPersonajes()
     })
   }
 

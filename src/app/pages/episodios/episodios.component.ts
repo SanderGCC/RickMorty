@@ -72,7 +72,7 @@ export class EpisodiosComponent implements OnInit {
     this._episodiosModel.episodios$.subscribe(episodios => {
       if (!!episodios) this.episodios = [...episodios]
       const element = document.body;
-      if (element.scrollHeight <= element.clientHeight) this.cargarMasEpisodios()
+      if (element.scrollHeight - element.clientHeight <= 5) this.cargarMasEpisodios()
     })
   }
 

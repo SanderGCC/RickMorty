@@ -66,7 +66,7 @@ export class LugaresComponent {
         this.consultar = !!data?.info?.next
         this.lugares = [...this.lugares, ...data.results]
         const element = document.body;
-        if (element.scrollHeight <= element.clientHeight) this.cargarMasLugares()
+        if (element.scrollHeight - element.clientHeight <= 5) this.cargarMasLugares()
 
       }
     })
