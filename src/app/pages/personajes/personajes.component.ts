@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
 import { Estado } from 'src/app/Enums/estado.enum';
 import { Personaje } from 'src/app/interfaces/personaje.interface';
 import { PersonajesModel } from './model/personajes.model';
@@ -35,7 +34,7 @@ export class PersonajesComponent implements OnInit {
   /**
    * Variable que contiene el valor de la última pagina seleccionada
    */
-  public ultimaPagina: number = 1;
+  public ultimaPagina: number = 0;
 
   /**
    * Variable que contiene los personajes
@@ -47,12 +46,35 @@ export class PersonajesComponent implements OnInit {
    */
   public eestado = Estado
 
+  /**
+   * total de personajes
+   */
+  public totalPersonajes: number = 1
+
   constructor(@Inject(DOCUMENT) private _document: Document,
     private _personajesModel: PersonajesModel,
     private _router: Router
   ) { }
   ngOnInit(): void {
-    this._cargarMasPersonajes(0);
+    this._inicializarSuscripciones();
+  }
+
+  /**
+   * Mètodo que inicializa las suscripciones
+   */
+  private _inicializarSuscripciones(): void {
+    this._cargarMasPersonajes(1);
+
+    this._personajesModel.totalpersonajes$.subscribe(info => {
+      this.consultar = !!info?.next
+      this.totalPersonajes = info?.count
+    })
+
+    this._personajesModel.personajes$.subscribe(personajes => {
+      if (!!personajes) this.personajes = [...personajes]
+      const element = document.body;
+      if (element.scrollHeight <= element.clientHeight) this.cargarMasPersonajes()
+    })
   }
 
   /**
@@ -60,15 +82,7 @@ export class PersonajesComponent implements OnInit {
    * @param pagina 
    */
   private _cargarMasPersonajes(pagina: number): void {
-    this._personajesModel.obtenerPersonajes([{ campo: 'page', valor: pagina }]).pipe(take(1)).subscribe(data => {
-      if (!!data?.results){
-        this.personajes = [...this.personajes, ...data.results]
-        const element = document.body;
-        if (element.scrollHeight <= element.clientHeight) this.cargarMasPersonajes();
-        
-
-      } 
-    })
+    if (this.consultar) this._personajesModel.loadPersonajes([{ campo: 'page', valor: pagina }])
   }
 
   /**

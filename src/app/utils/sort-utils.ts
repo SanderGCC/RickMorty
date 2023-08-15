@@ -6,7 +6,7 @@ export let Utils = {
    */
   sortKeyMaxToMin(entities: any): any {
       let entitiesSort: Array<any> = [];
-      const keysSort = Object.keys(entities).sort((b, a) => (+a) - (+b));
+      const keysSort = Object.keys(entities).sort((b, a) => (+b) - (+a));
       keysSort.map(key => entitiesSort.push(entities[key]));
       return entitiesSort;
   }

@@ -18,6 +18,7 @@ export class PersonajesService {
    * @returns Observable con la respuesta
    */
   public obtenerPersonajes(param: Array<Param>): Observable<any> {
+    console.log("sc ~ param:", param)
     return this._base.get('character', param);
   }
 

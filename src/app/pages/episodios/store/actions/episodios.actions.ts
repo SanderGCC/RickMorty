@@ -2,9 +2,9 @@ import { createAction, props } from "@ngrx/store";
 import { Param } from "src/app/interfaces/param.interface";
 
 export enum EpisodiosActionsTypes {
-  LoadEpisodios = '[EPISODIOS] Load Divipols ',
-  LoadEpisodiosSuccess = '[EPISODIOS] Load Divipols Success',
-  LoadEpisodiosError = '[EPISODIOS] Load Divipols Error',
+  LoadEpisodios = '[EPISODIOS] Load Episodios ',
+  LoadEpisodiosSuccess = '[EPISODIOS] Load Episodios Success',
+  LoadEpisodiosError = '[EPISODIOS] Load Episodios Error',
 }
 
 // All

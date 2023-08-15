@@ -81,8 +81,7 @@ export class EpisodiosComponent implements OnInit {
    * @param pagina 
    */
   private _cargarMasEpisodios(pagina: number): void {
-    console.log("sc ~ this.totalEpisodios >  this.episodios.length:", this.consultar,  this.episodios.length)
-    if(this.consultar) this._episodiosModel.loadEpisodios([{ campo: 'page', valor: pagina }])
+    if (this.consultar) this._episodiosModel.loadEpisodios([{ campo: 'page', valor: pagina }])
   }
 
   /**

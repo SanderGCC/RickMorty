@@ -9,19 +9,19 @@ export interface EpisodioState extends EntityState<Episodio> {
   metadata: any;
 }
 
-export const defaultDivipol: EpisodioState = {
+export const defaultEpisodio: EpisodioState = {
   ids: [],
   entities: {},
   metadata: null,
 }
 
-export const divipolAdapter: EntityAdapter<any> = createEntityAdapter<any>();
+export const episodioAdapter: EntityAdapter<any> = createEntityAdapter<any>();
 
-export const divipolInitialState = divipolAdapter.getInitialState(defaultDivipol);
+export const episodioInitialState = episodioAdapter.getInitialState(defaultEpisodio);
 
-const reducer = createReducer(divipolInitialState, 
+const reducer = createReducer(episodioInitialState, 
   on(EpisodiosActionsTypes.loadEpisodiosSuccess, (state, { payload }) => (
-    divipolAdapter.addMany(payload.results, {
+    episodioAdapter.addMany(payload.results, {
       ...state,
       loaded: true,
       loading: false,

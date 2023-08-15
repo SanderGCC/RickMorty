@@ -11,7 +11,14 @@ import { getAllEpisodios, getTotalEpisodios } from '../store/selectors/episodios
 @Injectable()
 export class EpisodiosModel {
 
+  /**
+   * Variable que define el observable a las entidades
+   */
   public episodios$: Observable<Array<Episodio>> = this._store.select(getAllEpisodios);
+  
+  /**
+   * Variable que define el observable al total de informaciòn
+   */
   public totalEpisodios$: Observable<any> = this._store.select(getTotalEpisodios);
 
   /**
