@@ -23,6 +23,8 @@ const reducer = createReducer(personajeInitialState,
   on(PersonjaesActionsTypes.loadPersonajesSuccess, (state, { payload }) => (
     personajeAdapter.addMany(payload.results, {
       ...state,
+      entities: {},
+      ids: [],
       loaded: true,
       loading: false,
       selectedId: null,
@@ -34,7 +36,8 @@ const reducer = createReducer(personajeInitialState,
     entities: {},
     loaded: false,
     loading: false,
-    error: payload
+    error: payload,
+    metadata: null
   })),
 );
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, catchError } from 'rxjs';
 import { Param } from 'src/app/interfaces/param.interface';
 import { BaseService } from '../../../services/base.service';
 
@@ -19,7 +19,11 @@ export class PersonajesService {
    */
   public obtenerPersonajes(param: Array<Param>): Observable<any> {
     console.log("sc ~ param:", param)
-    return this._base.get('character', param);
+    return this._base.get('character', param).pipe(
+      catchError(error => {
+        console.warn('TODO: lanzar modal de no hay data');
+        return EMPTY; // Return an empty observable to continue the chain
+      }));
   }
 
   /**

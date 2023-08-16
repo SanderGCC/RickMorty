@@ -1,7 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Estado } from 'src/app/Enums/estado.enum';
+import { Param } from 'src/app/interfaces/param.interface';
 import { Personaje } from 'src/app/interfaces/personaje.interface';
 import { PersonajesModel } from './model/personajes.model';
 
@@ -10,7 +13,7 @@ import { PersonajesModel } from './model/personajes.model';
   templateUrl: './personajes.component.html',
   styleUrls: ['./personajes.component.scss']
 })
-export class PersonajesComponent implements OnInit {
+export class PersonajesComponent implements OnInit, OnDestroy {
   /**
    * listener del evento scroll
    */
@@ -20,6 +23,11 @@ export class PersonajesComponent implements OnInit {
     const scrollTop = this._document.documentElement.scrollTop;
     this.mostrarBoton = (yOffSet || scrollTop) > 800
   }
+
+  /**
+   * subject encargado disparar el debouncer 
+   */
+  public debounce = new Subject<string>();
 
   /**
    * Variable que controla si se muestra el boton o no
@@ -47,16 +55,53 @@ export class PersonajesComponent implements OnInit {
   public eestado = Estado
 
   /**
+   * variable que contiene la referencia al formulario
+   */
+  public formGroupTexto!: FormGroup;
+
+  /**
    * total de personajes
    */
   public totalPersonajes: number = 1
 
+  /**
+   * Nombre Filtrado
+   */
+  public nombreFiltrado: string = ''
+
+  /**
+   * Variable que contiene las suscripciones
+   */
+  private _suscripciones!: Subscription
+
   constructor(@Inject(DOCUMENT) private _document: Document,
     private _personajesModel: PersonajesModel,
-    private _router: Router
+    private _router: Router,
+    private _formBuilder: FormBuilder,
   ) { }
+
+  ngOnDestroy(): void {
+    this._suscripciones.unsubscribe()
+  }
+
   ngOnInit(): void {
+    this.formGroupTexto = this._formBuilder.group({
+      name: [""]
+    })
+
     this._inicializarSuscripciones();
+  }
+
+
+  /**
+   * Método utilizado para lanzar la consulta de filtrado
+   */
+  public filtrarTexto(): void {
+    this.nombreFiltrado = this.formGroupTexto.get('name')?.value
+    this.personajes = []
+    this.ultimaPagina = 1
+    this.consultar = true
+    this._cargarMasPersonajes(this.ultimaPagina);
   }
 
   /**
@@ -65,16 +110,27 @@ export class PersonajesComponent implements OnInit {
   private _inicializarSuscripciones(): void {
     this._cargarMasPersonajes(1);
 
-    this._personajesModel.totalpersonajes$.subscribe(info => {
+    const totalPersonajes$ = this._personajesModel.totalpersonajes$.subscribe(info => {
       this.consultar = !!info?.next
       this.totalPersonajes = info?.count
     })
 
-    this._personajesModel.personajes$.subscribe(personajes => {
-      if (!!personajes) this.personajes = [...personajes]
+    const personajes$ = this._personajesModel.personajes$.subscribe(personajes => {
+      this.personajes = [...this.personajes, ...personajes]
+      console.log("sc ~ this.personajes:", this.personajes)
       const element = document.body;
       if (element.scrollHeight - element.clientHeight <= 5) this.cargarMasPersonajes()
     })
+
+    const debouncer$ = this.debounce.pipe(
+      debounceTime(400),
+      distinctUntilChanged())
+      .subscribe(value => this.filtrarTexto()
+      );
+
+    this._suscripciones.add(debouncer$)
+    this._suscripciones.add(personajes$)
+    this._suscripciones.add(totalPersonajes$)
   }
 
   /**
@@ -82,7 +138,9 @@ export class PersonajesComponent implements OnInit {
    * @param pagina 
    */
   private _cargarMasPersonajes(pagina: number): void {
-    if (this.consultar) this._personajesModel.loadPersonajes([{ campo: 'page', valor: pagina }])
+    let filtros: Array<Param> = []
+    if (!!this.nombreFiltrado) filtros.push({ 'campo': 'name', valor: this.nombreFiltrado })
+    if (this.consultar) this._personajesModel.loadPersonajes([{ campo: 'page', valor: pagina }, ...filtros])
   }
 
   /**

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MaterialModule } from 'src/app/modules/material.module';
@@ -20,6 +21,7 @@ import { PersonajesEffects } from './store/effects/personajes.effects';
   imports: [
     CommonModule,
     PersonajesRoutingModule,
+    ReactiveFormsModule,
     MaterialModule,
     InfiniteScrollModule,
     EffectsModule.forFeature([PersonajesEffects]),
