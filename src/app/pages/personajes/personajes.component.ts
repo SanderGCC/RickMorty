@@ -128,9 +128,9 @@ export class PersonajesComponent implements OnInit, OnDestroy {
       .subscribe(value => this.filtrarTexto()
       );
 
-    this._suscripciones.add(debouncer$)
-    this._suscripciones.add(personajes$)
-    this._suscripciones.add(totalPersonajes$)
+    this._suscripciones?.add(debouncer$)
+    this._suscripciones?.add(personajes$)
+    this._suscripciones?.add(totalPersonajes$)
   }
 
   /**

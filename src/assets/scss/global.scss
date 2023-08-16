@@ -101,12 +101,12 @@
 .card-detalle {
     max-width: 500px;
     min-width: 300px;
-    p{
+    p {
         color: $Mystery !important;
     }
     border-radius: 30px !important;
     background-color: $DarkSlateGray !important ;
-    padding: 20px ;
+    padding: 20px;
     &-header {
         text-align: center;
         display: flex;
@@ -203,10 +203,28 @@
     }
 }
 
-.centrar-todo{
+.centrar-todo {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+}
+
+.box-filtro {
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+    .filtroNombre {
+        margin: 20px 100px;
+        width: calc(100% - 200px);
+        .mat-mdc-form-field-subscript-wrapper {
+            display: none !important;
+        }
+        .mat-mdc-text-field-wrapper{
+            background: #0528288f !important;
+            border-radius: 6px !important;
+            backdrop-filter: blur(10px);
+        }
+    }
 }
 
 @keyframes pulso {

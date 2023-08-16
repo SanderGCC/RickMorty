@@ -1,6 +1,6 @@
-<div [formGroup]="formGroupTexto" style="    position: sticky; top: 10px; z-index: 10;">
+<div [formGroup]="formGroupTexto"  class="box-filtro">
 
-  <mat-form-field class="" style="margin: 20px 100px; width: calc(100% - 200px)" [floatLabel]="'never'"
+  <mat-form-field class="filtroNombre"  [floatLabel]="'never'"
     appearance="outline">
     <input matInput placeholder="Nombre" formControlName="name" (keyup)="debounce.next($event)">
   </mat-form-field>
